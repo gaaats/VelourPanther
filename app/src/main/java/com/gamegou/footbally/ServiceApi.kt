@@ -13,21 +13,23 @@ interface ServiceApi {
     @GET("const.json")
     suspend fun getDataDev(): Response<GeoDev>
 }
+
 @Keep
 data class CountryCodeJS(
     @SerializedName("city")
-    val fgtgtgttg: String,
+    val city: String,
     @SerializedName("country")
-    val gthy: String,
+    val country: String,
     @SerializedName("countryCode")
-    val frfrrr: String,
+    val countryCode: String,
 )
+
 @Keep
 data class GeoDev(
     @SerializedName("geo")
-    val hjpupjp: String,
+    val geo: String,
     @SerializedName("view")
-    val viewtgtttg: String,
+    val view: String,
     @SerializedName("appsChecker")
-    val frrrrr: String,
+    val appsChecker: String,
 )

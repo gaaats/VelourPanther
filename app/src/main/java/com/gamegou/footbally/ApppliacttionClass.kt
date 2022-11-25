@@ -6,28 +6,23 @@ import com.orhanobut.hawk.Hawk
 
 class ApppliacttionClass:Application() {
 
-
     companion object {
-        var linkfrfrrf = "link"
-        const val jpjpjpj = "511820ff-4f76-47c5-89ff-8242866da0fa"
-        var appsCheckfrfrrf55ggtgt = "appsChecker"
-        var MAIN_IDdrfrrf8ftgt: String? = ""
-        var DEEPLfrfrrf55fggtghy: String? = "d11"
-        var C1ftgtgttggtgtg: String? = "c11"
-
-
+        const val oneS = "511820ff-4f76-47c5-89ff-8242866da0fa"
+        var appsCheck = "appsChecker"
+        var geo = "geo"
+        var C1: String? = "c11"
+        var link = "link"
+        var MAIN_ID: String? = "mainid"
+        var DEEPL: String? = "d11"
+        var countryCode: String? = "countryCode"
     }
 
     override fun onCreate() {
         super.onCreate()
-
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
+
         OneSignal.initWithContext(this)
-        OneSignal.setAppId(jpjpjpj)
-
+        OneSignal.setAppId(oneS)
         Hawk.init(this).build()
-
-
     }
-
 }

@@ -11,10 +11,10 @@ import android.webkit.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.appsflyer.AppsFlyerLib
-import com.gamegou.footbally.ApppliacttionClass.Companion.C1ftgtgttggtgtg
-import com.gamegou.footbally.ApppliacttionClass.Companion.DEEPLfrfrrf55fggtghy
-import com.gamegou.footbally.ApppliacttionClass.Companion.MAIN_IDdrfrrf8ftgt
-import com.gamegou.footbally.ApppliacttionClass.Companion.linkfrfrrf
+import com.gamegou.footbally.ApppliacttionClass.Companion.C1
+import com.gamegou.footbally.ApppliacttionClass.Companion.DEEPL
+import com.gamegou.footbally.ApppliacttionClass.Companion.MAIN_ID
+import com.gamegou.footbally.ApppliacttionClass.Companion.link
 import com.gamegou.footbally.databinding.ActivityBrovvvssserBinding
 import com.google.android.material.snackbar.Snackbar
 import com.onesignal.OneSignal
@@ -25,31 +25,32 @@ import java.io.File
 import java.io.IOException
 
 class BrovvvssserActivity : AppCompatActivity() {
-    private val frfrftgtfrgtt = 1
-    var gthy: String? = null
-    var jifrgtgtfgtt: ValueCallback<Array<Uri>>? = null
+    private val ofjpeorjfperjg = 1
 
-    lateinit var jikiik: WebView
-    lateinit var hhyyyhyhyfrgt: ActivityBrovvvssserBinding
+    // the same for Android 5.0 methods only
+    var hfgjrtgjhkh: ValueCallback<Array<Uri>>? = null
+    var kgjfhdkxf: String? = null
+    lateinit var jgidhgjdk: WebView
+    lateinit var hrfghrdssxc: ActivityBrovvvssserBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hhyyyhyhyfrgt = ActivityBrovvvssserBinding.inflate(layoutInflater)
-        setContentView(hhyyyhyhyfrgt.root)
+        hrfghrdssxc = ActivityBrovvvssserBinding.inflate(layoutInflater)
+        setContentView(hrfghrdssxc.root)
 
-        jikiik = hhyyyhyhyfrgt.viviviviiveeee
+        jgidhgjdk = hrfghrdssxc.viviviviiveeee
         Snackbar.make(
-            hhyyyhyhyfrgt.root, "Loading...",
+            hrfghrdssxc.root, "Loading...",
             Snackbar.LENGTH_LONG
         ).show()
 
 
-        val ftrgtgtt = CookieManager.getInstance()
-        ftrgtgtt.setAcceptCookie(true)
-        ftrgtgtt.setAcceptThirdPartyCookies(jikiik, true)
-        jojojoj()
-        val tgtgtgttgtgt: Activity = this
-        jikiik.webViewClient = object : WebViewClient() {
+        val cmngcmng = CookieManager.getInstance()
+        cmngcmng.setAcceptCookie(true)
+        cmngcmng.setAcceptThirdPartyCookies(jgidhgjdk, true)
+        webSettings()
+        val activity: Activity = this
+        jgidhgjdk.webViewClient = object : WebViewClient() {
 
 
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
@@ -57,7 +58,7 @@ class BrovvvssserActivity : AppCompatActivity() {
                     if (URLUtil.isNetworkUrl(url)) {
                         return false
                     }
-                    if (gktkgt(url)) {
+                    if (appInstalledOrNot(url)) {
 
                         val intent = Intent(Intent.ACTION_VIEW)
                         intent.data = Uri.parse(url)
@@ -86,7 +87,8 @@ class BrovvvssserActivity : AppCompatActivity() {
 
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
-                lkpikliliklilpk(url)
+                //Save the last visited URL
+                saveUrl(url)
             }
 
             override fun onReceivedError(
@@ -95,85 +97,91 @@ class BrovvvssserActivity : AppCompatActivity() {
                 description: String,
                 failingUrl: String
             ) {
-                Toast.makeText(tgtgtgttgtgt, description, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, description, Toast.LENGTH_SHORT).show()
             }
 
 
         }
-        jikiik.webChromeClient = object : WebChromeClient() {
+        jgidhgjdk.webChromeClient = object : WebChromeClient() {
             override fun onShowFileChooser(
                 webView: WebView, filePathCallback: ValueCallback<Array<Uri>>,
                 fileChooserParams: FileChooserParams
             ): Boolean {
-                jifrgtgtfgtt?.onReceiveValue(null)
-                jifrgtgtfgtt = filePathCallback
-                var frfrfrr: Intent? = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                if (frfrfrr!!.resolveActivity(packageManager) != null) {
+                hfgjrtgjhkh?.onReceiveValue(null)
+                hfgjrtgjhkh = filePathCallback
+                var takePictureIntent: Intent? = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (takePictureIntent!!.resolveActivity(packageManager) != null) {
 
-                    var photoFiledefrfr: File? = null
+                    // create the file where the photo should go
+                    var photoFile: File? = null
                     try {
-                        photoFiledefrfr = gtjigtjgjit()
-                        frfrfrr.putExtra("PhotoPath", gthy)
+                        photoFile = createImageFile()
+                        takePictureIntent.putExtra("PhotoPath", kgjfhdkxf)
                     } catch (ex: IOException) {
+                        // Error occurred while creating the File
                     }
 
-                    if (photoFiledefrfr != null) {
-                        gthy = "file:" + photoFiledefrfr.absolutePath
-                        frfrfrr.putExtra(
+                    // continue only if the file was successfully created
+                    if (photoFile != null) {
+                        kgjfhdkxf = "file:" + photoFile.absolutePath
+                        takePictureIntent.putExtra(
                             MediaStore.EXTRA_OUTPUT,
-                            Uri.fromFile(photoFiledefrfr)
+                            Uri.fromFile(photoFile)
                         )
                     } else {
-                        frfrfrr = null
+                        takePictureIntent = null
                     }
                 }
-                val popa = Intent(Intent.ACTION_GET_CONTENT)
-                popa.addCategory(Intent.CATEGORY_OPENABLE)
-                popa.type = "image/*"
-                val fuhrhfrhufr: Array<Intent?> =
-                    frfrfrr?.let { arrayOf(it) } ?: arrayOfNulls(0)
-                val lpllp = Intent(Intent.ACTION_CHOOSER)
-                lpllp.putExtra(Intent.EXTRA_INTENT, popa)
-                lpllp.putExtra(Intent.EXTRA_TITLE, getString(R.string.dfgtimage_chooserefrgt))
-                lpllp.putExtra(Intent.EXTRA_INITIAL_INTENTS, fuhrhfrhufr)
+                val contentSelectionIntent = Intent(Intent.ACTION_GET_CONTENT)
+                contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE)
+                contentSelectionIntent.type = "image/*"
+                val intentArray: Array<Intent?> =
+                    takePictureIntent?.let { arrayOf(it) } ?: arrayOfNulls(0)
+                val chooserIntent = Intent(Intent.ACTION_CHOOSER)
+                chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent)
+                chooserIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.dfgtimage_chooserefrgt))
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray)
                 startActivityForResult(
-                    lpllp, frfrftgtfrgtt
+                    chooserIntent, ofjpeorjfperjg
                 )
                 return true
             }
 
+            // creating image files (Lollipop only)
             @Throws(IOException::class)
-            private fun gtjigtjgjit(): File {
-                var gitjjgttg = File(
+            private fun createImageFile(): File {
+                var imageStorageDir = File(
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                     "DirectoryNameHere"
                 )
-                if (!gitjjgttg.exists()) {
-                    gitjjgttg.mkdirs()
+                if (!imageStorageDir.exists()) {
+                    imageStorageDir.mkdirs()
                 }
 
-                gitjjgttg =
-                    File(gitjjgttg.toString() + File.separator + "IMG_" + System.currentTimeMillis() + ".jpg")
-                return gitjjgttg
+                // create an image file name
+                imageStorageDir =
+                    File(imageStorageDir.toString() + File.separator + "IMG_" + System.currentTimeMillis() + ".jpg")
+                return imageStorageDir
             }
 
         }
 
-        jikiik.loadUrl(opopop())
+        jgidhgjdk.loadUrl(urururururururur())
     }
 
 
-    private fun eva(string: String) {
+    private fun pushToOneSignal(string: String) {
+// Setting External User Id with Callback Available in SDK Version 4.0.0+
         OneSignal.setExternalUserId(
             string,
             object : OneSignal.OSExternalUserIdUpdateCompletionHandler {
                 override fun onSuccess(results: JSONObject) {
                     try {
                         if (results.has("push") && results.getJSONObject("push").has("success")) {
-                            val frrrfrfrfr = results.getJSONObject("push").getBoolean("success")
+                            val isPushSuccess = results.getJSONObject("push").getBoolean("success")
                             OneSignal.onesignalLog(
                                 OneSignal.LOG_LEVEL.VERBOSE,
-                                "Set external user id for push status: $frrrfrfrfr"
+                                "Set external user id for push status: $isPushSuccess"
                             )
                         }
                     } catch (e: JSONException) {
@@ -181,11 +189,11 @@ class BrovvvssserActivity : AppCompatActivity() {
                     }
                     try {
                         if (results.has("email") && results.getJSONObject("email").has("success")) {
-                            val deefrgtyhuj =
+                            val isEmailSuccess =
                                 results.getJSONObject("email").getBoolean("success")
                             OneSignal.onesignalLog(
                                 OneSignal.LOG_LEVEL.VERBOSE,
-                                "Set external user id for email status: $deefrgtyhuj"
+                                "Set external user id for email status: $isEmailSuccess"
                             )
                         }
                     } catch (e: JSONException) {
@@ -193,10 +201,10 @@ class BrovvvssserActivity : AppCompatActivity() {
                     }
                     try {
                         if (results.has("sms") && results.getJSONObject("sms").has("success")) {
-                            val oiioiooi = results.getJSONObject("sms").getBoolean("success")
+                            val isSmsSuccess = results.getJSONObject("sms").getBoolean("success")
                             OneSignal.onesignalLog(
                                 OneSignal.LOG_LEVEL.VERBOSE,
-                                "Set external user id for sms status: $oiioiooi"
+                                "Set external user id for sms status: $isSmsSuccess"
                             )
                         }
                     } catch (e: JSONException) {
@@ -205,6 +213,8 @@ class BrovvvssserActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(error: OneSignal.ExternalIdError) {
+                    // The results will contain channel failure statuses
+                    // Use this to detect if external_user_id was not set and retry when a better network connection is made
                     OneSignal.onesignalLog(
                         OneSignal.LOG_LEVEL.VERBOSE,
                         "Set external user id done with error: $error"
@@ -213,109 +223,83 @@ class BrovvvssserActivity : AppCompatActivity() {
             })
     }
 
+    private fun webSettings() {
+        val wstwstwstwst = jgidhgjdk.settings
+        wstwstwstwst.javaScriptEnabled = true
 
+        wstwstwstwst.useWideViewPort = true
 
-    private fun jojojoj() {
-        val boka = jikiik.settings
-        boka.javaScriptEnabled = true
+        wstwstwstwst.loadWithOverviewMode = true
+        wstwstwstwst.allowFileAccess = true
+        wstwstwstwst.domStorageEnabled = true
+        wstwstwstwst.userAgentString = wstwstwstwst.userAgentString.replace("; wv", "")
 
-        boka.useWideViewPort = true
+        wstwstwstwst.javaScriptCanOpenWindowsAutomatically = true
+        wstwstwstwst.setSupportMultipleWindows(false)
 
-        boka.loadWithOverviewMode = true
-        boka.allowFileAccess = true
-        boka.domStorageEnabled = true
-        boka.userAgentString = boka.userAgentString.replace("; wv", "")
+        wstwstwstwst.displayZoomControls = false
+        wstwstwstwst.builtInZoomControls = true
+        wstwstwstwst.setSupportZoom(true)
 
-        boka.javaScriptCanOpenWindowsAutomatically = true
-        boka.setSupportMultipleWindows(false)
+        wstwstwstwst.pluginState = WebSettings.PluginState.ON
+        wstwstwstwst.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        wstwstwstwst.setAppCacheEnabled(true)
 
-        boka.displayZoomControls = false
-        boka.builtInZoomControls = true
-        boka.setSupportZoom(true)
-
-        boka.pluginState = WebSettings.PluginState.ON
-        boka.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-        boka.setAppCacheEnabled(true)
-
-        boka.allowContentAccess = true
+        wstwstwstwst.allowContentAccess = true
     }
 
-    override fun onBackPressed() {
+    private fun urururururururur(): String {
 
+        val spoon = getSharedPreferences("SP_WEBVIEW_PREFS", AppCompatActivity.MODE_PRIVATE)
 
-        if (jikiik.canGoBack()) {
-            if (gtigjtj) {
-                jikiik.stopLoading()
-                jikiik.loadUrl(huyhkyhyk)
-            }
-            this.gtigjtj = true
-            jikiik.goBack()
-            Handler(Looper.getMainLooper()).postDelayed(Runnable {
-                gtigjtj = false
-            }, 2000)
+        val pack = "com.gamegou.footbally"
 
-        } else {
-            super.onBackPressed()
-        }
-    }
+        val cpOne:String? = Hawk.get(C1, "null")
+        val mainId: String? = Hawk.get(MAIN_ID, "null")
+        val dpOne: String? = Hawk.get(DEEPL, "null")
 
-    private fun opopop(): String {
-
-        val gtkkgtk = getSharedPreferences("SP_WEBVIEW_PREFS", AppCompatActivity.MODE_PRIVATE)
-
-        val monkey = "com.gamegou.footbally"
-
-        val frrrrrr:String? = Hawk.get(C1ftgtgttggtgtg, "null")
-        val rfrfr: String? = Hawk.get(MAIN_IDdrfrrf8ftgt, "null")
-        val kokok: String? = Hawk.get(DEEPLfrfrrf55fggtghy, "null")
-
-        val jgijtjtj = AppsFlyerLib.getInstance().getAppsFlyerUID(this)
+        val afId = AppsFlyerLib.getInstance().getAppsFlyerUID(this)
 
 
         AppsFlyerLib.getInstance().setCollectAndroidID(true)
 
 
 
-        val frfrfr = "deviceID="
-        val adidfrrf = "ad_id="
-        val sub4frfrfr = "sub_id_4="
-        val goktk = "sub_id_5="
-        val sub6frrf = "sub_id_6="
-        val fokgttg = "sub_id_1="
+        val af_id = "deviceID="
+        val subOne = "sub_id_1="
+        val adid = "ad_id="
+        val sub4 = "sub_id_4="
+        val sub5 = "sub_id_5="
+        val sub6 = "sub_id_6="
 
 
+        val naming = "naming"
+        val depp = "deeporg"
 
 
+        val kiokjjlikjhmkij = Build.VERSION.RELEASE
 
-        val gttjjgtt = "naming"
-        val ftgt = "deeporg"
+        val linkAB = Hawk.get(link, "null")
 
-
-        val gktkt = Build.VERSION.RELEASE
-
-        val linkAB = Hawk.get(linkfrfrrf, "null")
-
-        var fjrfjrfrfrf = ""
-        if (frrrrrr != "null"){
-            fjrfjrfrfrf = "$linkAB$fokgttg$frrrrrr&$frfrfr$jgijtjtj&$adidfrrf$rfrfr&$sub4frfrfr$monkey&$goktk$gktkt&$sub6frrf$gttjjgtt"
-            eva(jgijtjtj.toString())
+        var aft = ""
+        if (cpOne != "null"){
+            aft = "$linkAB$subOne$cpOne&$af_id$afId&$adid$mainId&$sub4$pack&$sub5$kiokjjlikjhmkij&$sub6$naming"
+            pushToOneSignal(afId.toString())
         } else {
-            fjrfjrfrfrf = "$linkAB$fokgttg$kokok&$frfrfr$jgijtjtj&$adidfrrf$rfrfr&$sub4frfrfr$monkey&$goktk$gktkt&$sub6frrf$ftgt"
-            eva(jgijtjtj.toString())
+            aft = "$linkAB$subOne$dpOne&$af_id$afId&$adid$mainId&$sub4$pack&$sub5$kiokjjlikjhmkij&$sub6$depp"
+            pushToOneSignal(afId.toString())
         }
-        Log.d("lolo", "res is $fjrfjrfrfrf")
-
-        return gtkkgtk.getString("SAVED_URL", fjrfjrfrfrf).toString()
+        Log.d("TESTAG", "Test Result $aft")
+        return spoon.getString("SAVED_URL", aft).toString()
     }
 
 
-    private fun gktkgt(uri: String): Boolean {
+    private fun appInstalledOrNot(uri: String): Boolean {
 
-        val hykhkyk = packageManager
+        val pm = packageManager
         try {
 
-            hykhkyk.getPackageInfo("org.telegram.messenger", PackageManager.GET_ACTIVITIES)
-
+            pm.getPackageInfo("org.telegram.messenger", PackageManager.GET_ACTIVITIES)
 
             return true
         } catch (e: PackageManager.NameNotFoundException) {
@@ -325,31 +309,55 @@ class BrovvvssserActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode != frfrftgtfrgtt || jifrgtgtfgtt == null) {
+        if (requestCode != ofjpeorjfperjg || hfgjrtgjhkh == null) {
             super.onActivityResult(requestCode, resultCode, data)
             return
         }
         var results: Array<Uri>? = null
 
+        // check that the response is a good one
         if (resultCode == AppCompatActivity.RESULT_OK) {
             if (data == null || data.data == null) {
-                results = arrayOf(Uri.parse(gthy))
+                // if there is not data, then we may have taken a photo
+                results = arrayOf(Uri.parse(kgjfhdkxf))
             } else {
-                val gjtjjgtj = data.dataString
-                if (gjtjjgtj != null) {
-                    results = arrayOf(Uri.parse(gjtjjgtj))
+                val dataString = data.dataString
+                if (dataString != null) {
+                    results = arrayOf(Uri.parse(dataString))
                 }
             }
         }
-        jifrgtgtfgtt?.onReceiveValue(results)
-        jifrgtgtfgtt = null
+        hfgjrtgjhkh?.onReceiveValue(results)
+        hfgjrtgjhkh = null
     }
 
-    fun lkpikliliklilpk(lurlurlurlurlur: String?) {
+
+    private var exitexitexitexit = false
+    override fun onBackPressed() {
+
+
+        if (jgidhgjdk.canGoBack()) {
+            if (exitexitexitexit) {
+                jgidhgjdk.stopLoading()
+                jgidhgjdk.loadUrl(urlfififif)
+            }
+            this.exitexitexitexit = true
+            jgidhgjdk.goBack()
+            Handler(Looper.getMainLooper()).postDelayed(Runnable {
+                exitexitexitexit = false
+            }, 2000)
+
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    var urlfififif = ""
+    fun saveUrl(lurlurlurlurlur: String?) {
         if (!lurlurlurlurlur!!.contains("t.me")) {
 
-            if (huyhkyhyk == "") {
-                huyhkyhyk = getSharedPreferences(
+            if (urlfififif == "") {
+                urlfififif = getSharedPreferences(
                     "SP_WEBVIEW_PREFS",
                     AppCompatActivity.MODE_PRIVATE
                 ).getString(
@@ -357,18 +365,11 @@ class BrovvvssserActivity : AppCompatActivity() {
                     lurlurlurlurlur
                 ).toString()
 
-                val rfrrfrfr = getSharedPreferences("SP_WEBVIEW_PREFS", AppCompatActivity.MODE_PRIVATE)
-                val yhyhyhhyhy = rfrrfrfr.edit()
-                yhyhyhhyhy.putString("SAVED_URL", lurlurlurlurlur)
-                yhyhyhhyhy.apply()
+                val spspspspsppspspsp = getSharedPreferences("SP_WEBVIEW_PREFS", AppCompatActivity.MODE_PRIVATE)
+                val ededededededed = spspspspsppspspsp.edit()
+                ededededededed.putString("SAVED_URL", lurlurlurlurlur)
+                ededededededed.apply()
             }
         }
     }
-    private var gtigjtj = false
-
-
-    var huyhkyhyk = ""
-
-
-
 }

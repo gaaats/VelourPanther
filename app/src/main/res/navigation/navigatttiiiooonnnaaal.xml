@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigatttiiiooonnnaaal"
+    app:startDestination="@id/starttttttFragment">
+
+    <fragment
+        android:id="@+id/starttttttFragment"
+        android:name="com.gamegou.footbally.StarttttttFragment"
+        android:label="fragment_startttttt"
+        tools:layout="@layout/fragment_startttttt" >
+        <action
+            android:id="@+id/action_starttttttFragment_to_seeecondFragment"
+            app:destination="@id/seeecondFragment" />
+        <action
+            android:id="@+id/action_starttttttFragment_to_innnffffooomFragment"
+            app:destination="@id/innnffffooomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seeecondFragment"
+        android:name="com.gamegou.footbally.SeeecondFragment"
+        android:label="fragment_seeecond"
+        tools:layout="@layout/fragment_seeecond" >
+        <action
+            android:id="@+id/action_seeecondFragment_to_reloadFragment"
+            app:destination="@id/reloadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/innnffffooomFragment"
+        android:name="com.gamegou.footbally.InnnffffooomFragment"
+        android:label="fragment_innnffffooom"
+        tools:layout="@layout/fragment_innnffffooom" />
+    <fragment
+        android:id="@+id/reloadFragment"
+        android:name="com.gamegou.footbally.ReloadFragment"
+        android:label="fragment_reload"
+        tools:layout="@layout/fragment_reload" >
+        <action
+            android:id="@+id/action_reloadFragment_to_starttttttFragment"
+            app:destination="@id/starttttttFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+</navigation>

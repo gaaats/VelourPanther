@@ -40,7 +40,6 @@ class AsfActtttttttAcct : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-
         bindAsffrffrr = ActivityAsfActtttttttAcctBinding.inflate(layoutInflater)
         setContentView(bindAsffrffrr.root)
 

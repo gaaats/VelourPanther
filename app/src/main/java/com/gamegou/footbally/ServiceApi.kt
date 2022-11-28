@@ -17,19 +17,19 @@ interface ServiceApi {
 @Keep
 data class CountryCodeJS(
     @SerializedName("city")
-    val city: String,
+    val cityfrfrr: String,
     @SerializedName("country")
-    val country: String,
+    val countryfgttt: String,
     @SerializedName("countryCode")
-    val countryCode: String,
+    val countryCodefgtgt: String,
 )
 
 @Keep
 data class GeoDev(
     @SerializedName("geo")
-    val geo: String,
+    val geofgtt: String,
     @SerializedName("view")
-    val view: String,
+    val viewgtgtt: String,
     @SerializedName("appsChecker")
-    val appsChecker: String,
+    val appsCheckergtgtt: String,
 )

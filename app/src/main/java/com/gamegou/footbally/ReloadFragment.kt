@@ -14,15 +14,25 @@ import kotlinx.coroutines.delay
 
 
 class ReloadFragment : Fragment() {
-    private var gtgtgthyjhuju: FragmentReloadBinding? = null
+
+    private fun detdefdfetgtt() {
+        Snackbar.make(
+            gtgyhujuju.root,
+            "Oops something went wrong, please try again...",
+            Snackbar.LENGTH_LONG
+        ).show()
+        requireActivity().onBackPressed()
+    }
+
+    private var gtgtgthyjhujufrrfr: FragmentReloadBinding? = null
     private val gtgyhujuju
-        get() = gtgtgthyjhuju ?: throw RuntimeException("FragmentReloadBinding = null")
+        get() = gtgtgthyjhujufrrfr ?: throw RuntimeException("FragmentReloadBinding = null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        gtgtgthyjhuju = FragmentReloadBinding.inflate(inflater, container, false)
+        gtgtgthyjhujufrrfr = FragmentReloadBinding.inflate(inflater, container, false)
         return gtgyhujuju.root
     }
 
@@ -34,7 +44,7 @@ class ReloadFragment : Fragment() {
             }
 
         } catch (e: Exception) {
-            detdefdfe()
+            detdefdfetgtt()
         }
 
 
@@ -47,11 +57,11 @@ class ReloadFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        gtgtgthyjhuju = null
+        gtgtgthyjhujufrrfr = null
         super.onDestroy()
     }
 
-    private fun kpkpkpkp() {
+    private fun tgttgt() {
         AlertDialog.Builder(requireContext())
             .setTitle("Exit")
             .setMessage("Current data will not be saved, EXIT?")
@@ -64,16 +74,4 @@ class ReloadFragment : Fragment() {
             .create()
             .show()
     }
-
-
-    private fun detdefdfe() {
-        Snackbar.make(
-            gtgyhujuju.root,
-            "Oops something went wrong, please try again...",
-            Snackbar.LENGTH_LONG
-        ).show()
-        requireActivity().onBackPressed()
-    }
-
-
 }

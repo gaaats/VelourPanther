@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.gamegou.footbally.databinding.FragmentInnnffffooomBinding
 import com.gamegou.footbally.databinding.FragmentSeeecondBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
@@ -16,34 +15,6 @@ import kotlin.random.Random
 
 
 class SeeecondFragment : Fragment() {
-    private var gtgtgthyjhuju: FragmentSeeecondBinding? = null
-    private val gtgyhujuju get() = gtgtgthyjhuju ?: throw RuntimeException("FragmentSeeecondBinding = null")
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        gtgtgthyjhuju = FragmentSeeecondBinding.inflate(inflater, container, false)
-        return gtgyhujuju.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        try {
-            val crftgt = "You winn\n${Random.nextInt(from = 100, until = 5000)} points"
-            gtgyhujuju.tvLoosedTryAgainftgtyh.text = crftgt
-
-            lifecycleScope.launchWhenCreated {
-                delay(1000)
-                findNavController().navigate(R.id.action_seeecondFragment_to_reloadFragment)
-            }
-
-        } catch (e: Exception) {
-            detdefdfe()
-        }
-
-
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun onPause() {
         onDestroy()
@@ -51,7 +22,7 @@ class SeeecondFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        gtgtgthyjhuju = null
+        gtgtgthyjhujugtgt = null
         super.onDestroy()
     }
 
@@ -69,18 +40,41 @@ class SeeecondFragment : Fragment() {
             .show()
     }
 
+    private var gtgtgthyjhujugtgt: FragmentSeeecondBinding? = null
+    private val frrrr get() = gtgtgthyjhujugtgt ?: throw RuntimeException("FragmentSeeecondBinding = null")
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        gtgtgthyjhujugtgt = FragmentSeeecondBinding.inflate(inflater, container, false)
+        return frrrr.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        try {
+            val ftfrrf = "You winn\n${Random.nextInt(from = 100, until = 5000)} points"
+            frrrr.tvLoosedTryAgainftgtyh.text = ftfrrf
+
+            lifecycleScope.launchWhenCreated {
+                delay(1000)
+                findNavController().navigate(R.id.action_seeecondFragment_to_reloadFragment)
+            }
+
+        } catch (e: Exception) {
+            detdefdfe()
+        }
+
+
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     private fun detdefdfe() {
         Snackbar.make(
-            gtgyhujuju.root,
+            frrrr.root,
             "Oops something went wrong, please try again...",
             Snackbar.LENGTH_LONG
         ).show()
         requireActivity().onBackPressed()
     }
-
-
-
-
 }

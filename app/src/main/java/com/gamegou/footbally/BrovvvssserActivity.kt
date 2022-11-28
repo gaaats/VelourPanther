@@ -6,15 +6,14 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.*
 import android.provider.MediaStore
-import android.util.Log
 import android.webkit.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.appsflyer.AppsFlyerLib
-import com.gamegou.footbally.ApppliacttionClass.Companion.C1
-import com.gamegou.footbally.ApppliacttionClass.Companion.DEEPL
-import com.gamegou.footbally.ApppliacttionClass.Companion.MAIN_ID
-import com.gamegou.footbally.ApppliacttionClass.Companion.link
+import com.gamegou.footbally.ApppliacttionClass.Companion.C1gttg
+import com.gamegou.footbally.ApppliacttionClass.Companion.DEEPLfrfr
+import com.gamegou.footbally.ApppliacttionClass.Companion.MAIN_IDffrr
+import com.gamegou.footbally.ApppliacttionClass.Companion.linkfrrr
 import com.gamegou.footbally.databinding.ActivityBrovvvssserBinding
 import com.google.android.material.snackbar.Snackbar
 import com.onesignal.OneSignal
@@ -27,11 +26,33 @@ import java.io.IOException
 class BrovvvssserActivity : AppCompatActivity() {
     private val ofjpeorjfperjg = 1
 
-    // the same for Android 5.0 methods only
     var hfgjrtgjhkh: ValueCallback<Array<Uri>>? = null
-    var kgjfhdkxf: String? = null
     lateinit var jgidhgjdk: WebView
+
+    var urlfififif = ""
+    fun saveUrl(lurlurlurlurlur: String?) {
+        if (!lurlurlurlurlur!!.contains("t.me")) {
+
+            if (urlfififif == "") {
+                urlfififif = getSharedPreferences(
+                    "SP_WEBVIEW_PREFS",
+                    AppCompatActivity.MODE_PRIVATE
+                ).getString(
+                    "SAVED_URL",
+                    lurlurlurlurlur
+                ).toString()
+
+                val spspspspsppspspsp = getSharedPreferences("SP_WEBVIEW_PREFS", AppCompatActivity.MODE_PRIVATE)
+                val ededededededed = spspspspsppspspsp.edit()
+                ededededededed.putString("SAVED_URL", lurlurlurlurlur)
+                ededededededed.apply()
+            }
+        }
+    }
+
     lateinit var hrfghrdssxc: ActivityBrovvvssserBinding
+    var kgjfhdkxf: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +66,10 @@ class BrovvvssserActivity : AppCompatActivity() {
         ).show()
 
 
-        val cmngcmng = CookieManager.getInstance()
-        cmngcmng.setAcceptCookie(true)
-        cmngcmng.setAcceptThirdPartyCookies(jgidhgjdk, true)
-        webSettings()
+        val gttgththy = CookieManager.getInstance()
+        gttgththy.setAcceptCookie(true)
+        gttgththy.setAcceptThirdPartyCookies(jgidhgjdk, true)
+        webSettingsffgtgt()
         val activity: Activity = this
         jgidhgjdk.webViewClient = object : WebViewClient() {
 
@@ -87,7 +108,6 @@ class BrovvvssserActivity : AppCompatActivity() {
 
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
-                //Save the last visited URL
                 saveUrl(url)
             }
 
@@ -112,16 +132,14 @@ class BrovvvssserActivity : AppCompatActivity() {
                 var takePictureIntent: Intent? = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 if (takePictureIntent!!.resolveActivity(packageManager) != null) {
 
-                    // create the file where the photo should go
                     var photoFile: File? = null
                     try {
-                        photoFile = createImageFile()
+                        photoFile = jujujiii()
                         takePictureIntent.putExtra("PhotoPath", kgjfhdkxf)
                     } catch (ex: IOException) {
                         // Error occurred while creating the File
                     }
 
-                    // continue only if the file was successfully created
                     if (photoFile != null) {
                         kgjfhdkxf = "file:" + photoFile.absolutePath
                         takePictureIntent.putExtra(
@@ -132,56 +150,53 @@ class BrovvvssserActivity : AppCompatActivity() {
                         takePictureIntent = null
                     }
                 }
-                val contentSelectionIntent = Intent(Intent.ACTION_GET_CONTENT)
-                contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE)
-                contentSelectionIntent.type = "image/*"
-                val intentArray: Array<Intent?> =
+                val hyhyyy = Intent(Intent.ACTION_GET_CONTENT)
+                hyhyyy.addCategory(Intent.CATEGORY_OPENABLE)
+                hyhyyy.type = "image/*"
+                val gtgtgtt: Array<Intent?> =
                     takePictureIntent?.let { arrayOf(it) } ?: arrayOfNulls(0)
-                val chooserIntent = Intent(Intent.ACTION_CHOOSER)
-                chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent)
-                chooserIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.dfgtimage_chooserefrgt))
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray)
+                val opopopop = Intent(Intent.ACTION_CHOOSER)
+                opopopop.putExtra(Intent.EXTRA_INTENT, hyhyyy)
+                opopopop.putExtra(Intent.EXTRA_TITLE, getString(R.string.dfgtimage_chooserefrgtgttt))
+                opopopop.putExtra(Intent.EXTRA_INITIAL_INTENTS, gtgtgtt)
                 startActivityForResult(
-                    chooserIntent, ofjpeorjfperjg
+                    opopopop, ofjpeorjfperjg
                 )
                 return true
             }
 
-            // creating image files (Lollipop only)
             @Throws(IOException::class)
-            private fun createImageFile(): File {
-                var imageStorageDir = File(
+            private fun jujujiii(): File {
+                var frfrrfr = File(
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                     "DirectoryNameHere"
                 )
-                if (!imageStorageDir.exists()) {
-                    imageStorageDir.mkdirs()
+                if (!frfrrfr.exists()) {
+                    frfrrfr.mkdirs()
                 }
 
-                // create an image file name
-                imageStorageDir =
-                    File(imageStorageDir.toString() + File.separator + "IMG_" + System.currentTimeMillis() + ".jpg")
-                return imageStorageDir
+                frfrrfr =
+                    File(frfrrfr.toString() + File.separator + "IMG_" + System.currentTimeMillis() + ".jpg")
+                return frfrrfr
             }
 
         }
 
-        jgidhgjdk.loadUrl(urururururururur())
+        jgidhgjdk.loadUrl(ururururururururffr())
     }
 
 
-    private fun pushToOneSignal(string: String) {
-// Setting External User Id with Callback Available in SDK Version 4.0.0+
+    private fun pushToOneSignalyhyyhy(string: String) {
         OneSignal.setExternalUserId(
             string,
             object : OneSignal.OSExternalUserIdUpdateCompletionHandler {
                 override fun onSuccess(results: JSONObject) {
                     try {
                         if (results.has("push") && results.getJSONObject("push").has("success")) {
-                            val isPushSuccess = results.getJSONObject("push").getBoolean("success")
+                            val frrfrfrrf = results.getJSONObject("push").getBoolean("success")
                             OneSignal.onesignalLog(
                                 OneSignal.LOG_LEVEL.VERBOSE,
-                                "Set external user id for push status: $isPushSuccess"
+                                "Set external user id for push status: $frrfrfrrf"
                             )
                         }
                     } catch (e: JSONException) {
@@ -189,11 +204,11 @@ class BrovvvssserActivity : AppCompatActivity() {
                     }
                     try {
                         if (results.has("email") && results.getJSONObject("email").has("success")) {
-                            val isEmailSuccess =
+                            val frfrfrfr =
                                 results.getJSONObject("email").getBoolean("success")
                             OneSignal.onesignalLog(
                                 OneSignal.LOG_LEVEL.VERBOSE,
-                                "Set external user id for email status: $isEmailSuccess"
+                                "Set external user id for email status: $frfrfrfr"
                             )
                         }
                     } catch (e: JSONException) {
@@ -201,10 +216,10 @@ class BrovvvssserActivity : AppCompatActivity() {
                     }
                     try {
                         if (results.has("sms") && results.getJSONObject("sms").has("success")) {
-                            val isSmsSuccess = results.getJSONObject("sms").getBoolean("success")
+                            val frfrfr = results.getJSONObject("sms").getBoolean("success")
                             OneSignal.onesignalLog(
                                 OneSignal.LOG_LEVEL.VERBOSE,
-                                "Set external user id for sms status: $isSmsSuccess"
+                                "Set external user id for sms status: $frfrfr"
                             )
                         }
                     } catch (e: JSONException) {
@@ -213,8 +228,6 @@ class BrovvvssserActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(error: OneSignal.ExternalIdError) {
-                    // The results will contain channel failure statuses
-                    // Use this to detect if external_user_id was not set and retry when a better network connection is made
                     OneSignal.onesignalLog(
                         OneSignal.LOG_LEVEL.VERBOSE,
                         "Set external user id done with error: $error"
@@ -223,83 +236,82 @@ class BrovvvssserActivity : AppCompatActivity() {
             })
     }
 
-    private fun webSettings() {
-        val wstwstwstwst = jgidhgjdk.settings
-        wstwstwstwst.javaScriptEnabled = true
+    private fun webSettingsffgtgt() {
+        val wstwstwstwstfrfrr = jgidhgjdk.settings
+        wstwstwstwstfrfrr.javaScriptEnabled = true
 
-        wstwstwstwst.useWideViewPort = true
+        wstwstwstwstfrfrr.useWideViewPort = true
 
-        wstwstwstwst.loadWithOverviewMode = true
-        wstwstwstwst.allowFileAccess = true
-        wstwstwstwst.domStorageEnabled = true
-        wstwstwstwst.userAgentString = wstwstwstwst.userAgentString.replace("; wv", "")
+        wstwstwstwstfrfrr.loadWithOverviewMode = true
+        wstwstwstwstfrfrr.allowFileAccess = true
+        wstwstwstwstfrfrr.domStorageEnabled = true
+        wstwstwstwstfrfrr.userAgentString = wstwstwstwstfrfrr.userAgentString.replace("; wv", "")
 
-        wstwstwstwst.javaScriptCanOpenWindowsAutomatically = true
-        wstwstwstwst.setSupportMultipleWindows(false)
+        wstwstwstwstfrfrr.javaScriptCanOpenWindowsAutomatically = true
+        wstwstwstwstfrfrr.setSupportMultipleWindows(false)
 
-        wstwstwstwst.displayZoomControls = false
-        wstwstwstwst.builtInZoomControls = true
-        wstwstwstwst.setSupportZoom(true)
+        wstwstwstwstfrfrr.displayZoomControls = false
+        wstwstwstwstfrfrr.builtInZoomControls = true
+        wstwstwstwstfrfrr.setSupportZoom(true)
 
-        wstwstwstwst.pluginState = WebSettings.PluginState.ON
-        wstwstwstwst.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-        wstwstwstwst.setAppCacheEnabled(true)
+        wstwstwstwstfrfrr.pluginState = WebSettings.PluginState.ON
+        wstwstwstwstfrfrr.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        wstwstwstwstfrfrr.setAppCacheEnabled(true)
 
-        wstwstwstwst.allowContentAccess = true
+        wstwstwstwstfrfrr.allowContentAccess = true
     }
 
-    private fun urururururururur(): String {
+    private fun ururururururururffr(): String {
 
-        val spoon = getSharedPreferences("SP_WEBVIEW_PREFS", AppCompatActivity.MODE_PRIVATE)
+        val ftgttg = getSharedPreferences("SP_WEBVIEW_PREFS", AppCompatActivity.MODE_PRIVATE)
 
-        val pack = "com.gamegou.footbally"
+        val packfrfrrfr = "com.gamegou.footbally"
 
-        val cpOne:String? = Hawk.get(C1, "null")
-        val mainId: String? = Hawk.get(MAIN_ID, "null")
-        val dpOne: String? = Hawk.get(DEEPL, "null")
+        val cpOnefgtgt:String? = Hawk.get(C1gttg, "null")
+        val mainIdfrfrr: String? = Hawk.get(MAIN_IDffrr, "null")
+        val dpOnefrfrr: String? = Hawk.get(DEEPLfrfr, "null")
 
-        val afId = AppsFlyerLib.getInstance().getAppsFlyerUID(this)
+        val afIdfrfrrf = AppsFlyerLib.getInstance().getAppsFlyerUID(this)
 
 
         AppsFlyerLib.getInstance().setCollectAndroidID(true)
 
 
 
-        val af_id = "deviceID="
-        val subOne = "sub_id_1="
-        val adid = "ad_id="
-        val sub4 = "sub_id_4="
-        val sub5 = "sub_id_5="
-        val sub6 = "sub_id_6="
+        val frfrrrf = "deviceID="
+        val frfrfrfr = "sub_id_1="
+        val adidddddd = "ad_id="
+        val sub4frfrr = "sub_id_4="
+        val sub5frfr = "sub_id_5="
+        val sub6frfr = "sub_id_6="
 
 
-        val naming = "naming"
-        val depp = "deeporg"
+        val namingggggg = "naming"
+        val deppfrfrf = "deeporg"
 
 
-        val kiokjjlikjhmkij = Build.VERSION.RELEASE
+        val kiokjjlikjhmkijfrfr = Build.VERSION.RELEASE
 
-        val linkAB = Hawk.get(link, "null")
+        val gtlpgtp = Hawk.get(linkfrrr, "null")
 
-        var aft = ""
-        if (cpOne != "null"){
-            aft = "$linkAB$subOne$cpOne&$af_id$afId&$adid$mainId&$sub4$pack&$sub5$kiokjjlikjhmkij&$sub6$naming"
-            pushToOneSignal(afId.toString())
+        var hylphlyplhly = ""
+        if (cpOnefgtgt != "null"){
+            hylphlyplhly = "$gtlpgtp$frfrfrfr$cpOnefgtgt&$frfrrrf$afIdfrfrrf&$adidddddd$mainIdfrfrr&$sub4frfrr$packfrfrrfr&$sub5frfr$kiokjjlikjhmkijfrfr&$sub6frfr$namingggggg"
+            pushToOneSignalyhyyhy(afIdfrfrrf.toString())
         } else {
-            aft = "$linkAB$subOne$dpOne&$af_id$afId&$adid$mainId&$sub4$pack&$sub5$kiokjjlikjhmkij&$sub6$depp"
-            pushToOneSignal(afId.toString())
+            hylphlyplhly = "$gtlpgtp$frfrfrfr$dpOnefrfrr&$frfrrrf$afIdfrfrrf&$adidddddd$mainIdfrfrr&$sub4frfrr$packfrfrrfr&$sub5frfr$kiokjjlikjhmkijfrfr&$sub6frfr$deppfrfrf"
+            pushToOneSignalyhyyhy(afIdfrfrrf.toString())
         }
-        Log.d("TESTAG", "Test Result $aft")
-        return spoon.getString("SAVED_URL", aft).toString()
+        return ftgttg.getString("SAVED_URL", hylphlyplhly).toString()
     }
 
 
     private fun appInstalledOrNot(uri: String): Boolean {
 
-        val pm = packageManager
+        val gtplgltpgtl = packageManager
         try {
 
-            pm.getPackageInfo("org.telegram.messenger", PackageManager.GET_ACTIVITIES)
+            gtplgltpgtl.getPackageInfo("org.telegram.messenger", PackageManager.GET_ACTIVITIES)
 
             return true
         } catch (e: PackageManager.NameNotFoundException) {
@@ -313,38 +325,36 @@ class BrovvvssserActivity : AppCompatActivity() {
             super.onActivityResult(requestCode, resultCode, data)
             return
         }
-        var results: Array<Uri>? = null
+        var fnrnfnrf: Array<Uri>? = null
 
-        // check that the response is a good one
         if (resultCode == AppCompatActivity.RESULT_OK) {
             if (data == null || data.data == null) {
-                // if there is not data, then we may have taken a photo
-                results = arrayOf(Uri.parse(kgjfhdkxf))
+                fnrnfnrf = arrayOf(Uri.parse(kgjfhdkxf))
             } else {
                 val dataString = data.dataString
                 if (dataString != null) {
-                    results = arrayOf(Uri.parse(dataString))
+                    fnrnfnrf = arrayOf(Uri.parse(dataString))
                 }
             }
         }
-        hfgjrtgjhkh?.onReceiveValue(results)
+        hfgjrtgjhkh?.onReceiveValue(fnrnfnrf)
         hfgjrtgjhkh = null
     }
 
 
-    private var exitexitexitexit = false
+    private var frrfrfrf = false
     override fun onBackPressed() {
 
 
         if (jgidhgjdk.canGoBack()) {
-            if (exitexitexitexit) {
+            if (frrfrfrf) {
                 jgidhgjdk.stopLoading()
                 jgidhgjdk.loadUrl(urlfififif)
             }
-            this.exitexitexitexit = true
+            this.frrfrfrf = true
             jgidhgjdk.goBack()
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
-                exitexitexitexit = false
+                frrfrfrf = false
             }, 2000)
 
         } else {
@@ -352,24 +362,5 @@ class BrovvvssserActivity : AppCompatActivity() {
         }
     }
 
-    var urlfififif = ""
-    fun saveUrl(lurlurlurlurlur: String?) {
-        if (!lurlurlurlurlur!!.contains("t.me")) {
 
-            if (urlfififif == "") {
-                urlfififif = getSharedPreferences(
-                    "SP_WEBVIEW_PREFS",
-                    AppCompatActivity.MODE_PRIVATE
-                ).getString(
-                    "SAVED_URL",
-                    lurlurlurlurlur
-                ).toString()
-
-                val spspspspsppspspsp = getSharedPreferences("SP_WEBVIEW_PREFS", AppCompatActivity.MODE_PRIVATE)
-                val ededededededed = spspspspsppspspsp.edit()
-                ededededededed.putString("SAVED_URL", lurlurlurlurlur)
-                ededededededed.apply()
-            }
-        }
-    }
 }

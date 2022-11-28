@@ -10,25 +10,41 @@ import com.gamegou.footbally.databinding.FragmentInnnffffooomBinding
 import com.google.android.material.snackbar.Snackbar
 
 class InnnffffooomFragment : Fragment() {
-    private var gtgtgthyjhuju: FragmentInnnffffooomBinding? = null
-    private val gtgyhujuju get() = gtgtgthyjhuju ?: throw RuntimeException("FragmentInnnffffooomBinding = null")
+    private var gtgtt: FragmentInnnffffooomBinding? = null
+    private val popopo get() = gtgtt ?: throw RuntimeException("FragmentInnnffffooomBinding = null")
+
+    override fun onPause() {
+        onDestroy()
+        super.onPause()
+    }
+
+
+
+    private fun detdefdfe() {
+        Snackbar.make(
+            popopo.root,
+            "Oops something went wrong, please try again...",
+            Snackbar.LENGTH_LONG
+        ).show()
+        requireActivity().onBackPressed()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        gtgtgthyjhuju = FragmentInnnffffooomBinding.inflate(inflater, container, false)
-        return gtgyhujuju.root
+        gtgtt = FragmentInnnffffooomBinding.inflate(inflater, container, false)
+        return popopo.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         try {
 
-            gtgyhujuju.root.background.alpha = 190
-            gtgyhujuju.btnImgExitInfo.setOnClickListener {
-                kpkpkpkp()
+            popopo.root.background.alpha = 190
+            popopo.btnImgExitInfo.setOnClickListener {
+                poopopop()
             }
-            gtgyhujuju.btnUnderstandGameRules.setOnClickListener {
+            popopo.btnUnderstandGameRules.setOnClickListener {
                 requireActivity().onBackPressed()
             }
 
@@ -41,11 +57,11 @@ class InnnffffooomFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        gtgtgthyjhuju = null
+        gtgtt = null
         super.onDestroy()
     }
 
-    private fun kpkpkpkp() {
+    private fun poopopop() {
         AlertDialog.Builder(requireContext())
             .setTitle("Exit")
             .setMessage("Current data will not be saved, EXIT?")
@@ -59,21 +75,7 @@ class InnnffffooomFragment : Fragment() {
             .show()
     }
 
-    override fun onPause() {
-        onDestroy()
-        super.onPause()
-    }
 
-
-
-    private fun detdefdfe() {
-        Snackbar.make(
-            gtgyhujuju.root,
-            "Oops something went wrong, please try again...",
-            Snackbar.LENGTH_LONG
-        ).show()
-        requireActivity().onBackPressed()
-    }
 
 
 

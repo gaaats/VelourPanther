@@ -77,7 +77,7 @@
         app:layout_constraintTop_toTopOf="@id/guideline_hor_30fgtghy"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/treasure" />
+        app:lottie_rawRes="@raw/treasurefgtgt" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_loosed_try_againftgtyh"

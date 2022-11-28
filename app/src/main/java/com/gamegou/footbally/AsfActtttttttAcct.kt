@@ -3,44 +3,63 @@ package com.gamegou.footbally
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.appsflyer.AppsFlyerConversionListener
-import com.appsflyer.AppsFlyerLib
-import com.gamegou.footbally.ApppliacttionClass.Companion.C1
-import com.gamegou.footbally.ApppliacttionClass.Companion.DEEPL
-import com.gamegou.footbally.ApppliacttionClass.Companion.appsCheck
-import com.gamegou.footbally.ApppliacttionClass.Companion.countryCode
-import com.gamegou.footbally.ApppliacttionClass.Companion.geo
+import com.gamegou.footbally.ApppliacttionClass.Companion.appsCheckfrr
+import com.gamegou.footbally.ApppliacttionClass.Companion.countryCodefrrfr
+import com.gamegou.footbally.ApppliacttionClass.Companion.geomeo
 import com.gamegou.footbally.databinding.ActivityAsfActtttttttAcctBinding
 import com.orhanobut.hawk.Hawk
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import com.appsflyer.AppsFlyerConversionListener
+import com.appsflyer.AppsFlyerLib
+import com.gamegou.footbally.ApppliacttionClass.Companion.C1gttg
+import com.gamegou.footbally.ApppliacttionClass.Companion.DEEPLfrfr
+
 
 class AsfActtttttttAcct : AppCompatActivity() {
-    lateinit var bindAsf: ActivityAsfActtttttttAcctBinding
+    lateinit var bindAsffrffrr: ActivityAsfActtttttttAcctBinding
+
+    private fun intLONEfrfrrf() {
+        val intenttgtgtt = Intent(this@AsfActtttttttAcct, GaaaameeeHooldeerActivity::class.java)
+        Hawk.put(geomeo, null)
+        Hawk.put(countryCodefrrfr, null)
+        Hawk.put(appsCheckfrr, null)
+        startActivity(intenttgtgtt)
+        finish()
+    }
+
+    private fun intWEdrfrrf() {
+        val intentfrfrrf = Intent(this@AsfActtttttttAcct, BrovvvssserActivity::class.java)
+        Hawk.put(geomeo, null)
+        Hawk.put(countryCodefrrfr, null)
+        Hawk.put(appsCheckfrr, null)
+        startActivity(intentfrfrrf)
+        finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        bindAsf = ActivityAsfActtttttttAcctBinding.inflate(layoutInflater)
-        setContentView(bindAsf.root)
+        bindAsffrffrr = ActivityAsfActtttttttAcctBinding.inflate(layoutInflater)
+        setContentView(bindAsffrffrr.root)
 
-        val appsCh: String? = Hawk.get(appsCheck, "null")
+        val appsChfrffrrf: String? = Hawk.get(appsCheckfrr, "null")
 
-        if (appsCh == "1") {
+        if (appsChfrffrrf == "1") {
             AppsFlyerLib.getInstance()
-                .init("BrT5KSpPeaEcduDRgNFHgj", conversionDataListener, applicationContext)
+                .init("BrT5KSpPeaEcduDRgNFHgj", frfrfrpl, applicationContext)
             AppsFlyerLib.getInstance().start(this)
         }
 
-        folk()
+        folkfrrrf()
 
     }
 
-    private val conversionDataListener = object : AppsFlyerConversionListener {
+    private val frfrfrpl = object : AppsFlyerConversionListener {
         override fun onConversionDataSuccess(data: MutableMap<String, Any>?) {
             val dataGotten = data?.get("campaign").toString()
-            Hawk.put(C1, dataGotten)
+            Hawk.put(C1gttg, dataGotten)
         }
         override fun onConversionDataFail(p0: String?) {}
         override fun onAppOpenAttribution(p0: MutableMap<String, String>?) {}
@@ -48,55 +67,38 @@ class AsfActtttttttAcct : AppCompatActivity() {
     }
 
 
-    private fun folk() {
+    private fun folkfrrrf() {
 
-        val countriesPool: String = Hawk.get(geo)
-        val countyC: String = Hawk.get(countryCode, "null")
+        val ftgtgttg: String = Hawk.get(geomeo)
+        val countyCfrfrrfrf: String = Hawk.get(countryCodefrrfr, "null")
 
-        val deeplink: String? = Hawk.get(DEEPL, "null") //здесь нужен дефолтный ноль
-        val appsCh: String? = Hawk.get(appsCheck, "null")
-        var naming: String? = Hawk.get(C1)
+        val deeplinkgtgttg: String? = Hawk.get(DEEPLfrfr, "null") //здесь нужен дефолтный ноль
+        val appsChfrfgtg: String? = Hawk.get(appsCheckfrr, "null")
+        var namingfrfrrr: String? = Hawk.get(C1gttg)
 
-        if (appsCh == "1") {
-            val d = Log.d("AppsChecker", appsCh)
+        if (appsChfrfgtg == "1") {
             val executorService = Executors.newSingleThreadScheduledExecutor()
             executorService.scheduleAtFixedRate({
-                if (naming != null) {
+                if (namingfrfrrr != null) {
 
-                    if (naming!!.contains("tdb2") || countriesPool.contains(countyC) || deeplink!!.contains("tdb2")) {
-                        Log.d("Apps Checker", "naming: $naming")
+                    if (namingfrfrrr!!.contains("tdb2") || ftgtgttg.contains(countyCfrfrrfrf) || deeplinkgtgttg!!.contains("tdb2")) {
                         executorService.shutdown()
-                        intWE()
+                        intWEdrfrrf()
                     } else {
                         executorService.shutdown()
-                        intLONE()
+                        intLONEfrfrrf()
                     }
                 } else {
-                    naming = Hawk.get(C1)
-                    Log.d("TestInUIHawk", "Received null $naming")
+                    namingfrfrrr = Hawk.get(C1gttg)
                 }
             }, 0, 1, TimeUnit.SECONDS)
-        }  else if (countriesPool.contains(countyC)) {
-            intWE()
+        }  else if (ftgtgttg.contains(countyCfrfrrfrf)) {
+            intWEdrfrrf()
         } else {
-            intLONE()
+            intLONEfrfrrf()
         }
 
     }
 
-    private fun intLONE() {
-        val intent = Intent(this@AsfActtttttttAcct, GaaaameeeHooldeerActivity::class.java)
-        Hawk.put(geo, null)
-        Hawk.put(countryCode, null)
-        startActivity(intent)
-        finish()
-    }
 
-    private fun intWE() {
-        val intent = Intent(this@AsfActtttttttAcct, BrovvvssserActivity::class.java)
-        Hawk.put(geo, null)
-        Hawk.put(countryCode, null)
-        startActivity(intent)
-        finish()
-    }
 }

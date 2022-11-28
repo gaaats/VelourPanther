@@ -15,89 +15,104 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class StarttttttFragment : Fragment() {
-    var gtgt = 0.8f
-    var plfr = 0.05f
 
-    private var gtu: FragmentStarttttttBinding? = null
-    private val pola
-        get() = gtu ?: throw RuntimeException("FragmentStarttttttBinding = null")
+    private fun gtttt() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Exit")
+            .setMessage("Exit, realy?")
+            .setPositiveButton("Yes, Exit") { _, _ ->
+                requireActivity().finish()
+            }
+            .setNegativeButton("Deny") { _, _ ->
+            }
+            .setCancelable(true)
+            .create()
+            .show()
+    }
+
+    var gtgtfgt = 0.8f
+    var plfrfgtt = 0.05f
+
+    private var gtufgt: FragmentStarttttttBinding? = null
+    private val polafr
+        get() = gtufgt ?: throw RuntimeException("FragmentStarttttttBinding = null")
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        gtu = FragmentStarttttttBinding.inflate(inflater, container, false)
-        return pola.root
+        gtufgt = FragmentStarttttttBinding.inflate(inflater, container, false)
+        return polafr.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         try {
 
-            pola.root.background.alpha = 190
+            polafr.root.background.alpha = 220
 
-            pola.btnImgHelp.setOnClickListener {
+            polafr.btnImgHelp.setOnClickListener {
                 findNavController().navigate(R.id.action_starttttttFragment_to_innnffffooomFragment)
             }
-            pola.btnImgExit.setOnClickListener {
-                alalalet()
+            polafr.btnImgExit.setOnClickListener {
+                gtttt()
 
             }
 
 
 
-            pola.btnElem1.setOnClickListener {
+            polafr.btnElem1.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem2.setOnClickListener {
+            polafr.btnElem2.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem3.setOnClickListener {
+            polafr.btnElem3.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem4.setOnClickListener {
+            polafr.btnElem4.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem5.setOnClickListener {
+            polafr.btnElem5.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem6.setOnClickListener {
+            polafr.btnElem6.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem7.setOnClickListener {
+            polafr.btnElem7.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem8.setOnClickListener {
+            polafr.btnElem8.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem9.setOnClickListener {
+            polafr.btnElem9.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem10.setOnClickListener {
+            polafr.btnElem10.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem11.setOnClickListener {
+            polafr.btnElem11.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
-            pola.btnElem12.setOnClickListener {
+            polafr.btnElem12.setOnClickListener {
                 it.visibility = View.GONE
-                polskks()
+                polskksgtgtt()
             }
 
 
         } catch (e: Exception) {
-            afrhgthUygt()
+            ftgtgtt()
         }
 
         super.onViewCreated(view, savedInstanceState)
@@ -108,15 +123,15 @@ class StarttttttFragment : Fragment() {
         super.onPause()
     }
 
-    private fun polskks() {
-        if (isisKfjr(pola.btnElem1) && isisKfjr(pola.btnElem2) && isisKfjr(
-                pola.btnElem3
-            ) && isisKfjr(pola.btnElem4) && isisKfjr(pola.btnElem5) && isisKfjr(
-                pola.btnElem6
-            ) && isisKfjr(pola.btnElem7) && isisKfjr(pola.btnElem8) && isisKfjr(
-                pola.btnElem9
-            ) && isisKfjr(pola.btnElem10) && isisKfjr(pola.btnElem11) && isisKfjr(
-                pola.btnElem12
+    private fun polskksgtgtt() {
+        if (isisKfjrgtttt(polafr.btnElem1) && isisKfjrgtttt(polafr.btnElem2) && isisKfjrgtttt(
+                polafr.btnElem3
+            ) && isisKfjrgtttt(polafr.btnElem4) && isisKfjrgtttt(polafr.btnElem5) && isisKfjrgtttt(
+                polafr.btnElem6
+            ) && isisKfjrgtttt(polafr.btnElem7) && isisKfjrgtttt(polafr.btnElem8) && isisKfjrgtttt(
+                polafr.btnElem9
+            ) && isisKfjrgtttt(polafr.btnElem10) && isisKfjrgtttt(polafr.btnElem11) && isisKfjrgtttt(
+                polafr.btnElem12
             )
         ) {
             findNavController().navigate(R.id.action_starttttttFragment_to_seeecondFragment)
@@ -124,13 +139,13 @@ class StarttttttFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        gtu = null
+        gtufgt = null
         super.onDestroy()
     }
 
-    private fun afrhgthUygt() {
+    private fun ftgtgtt() {
         Snackbar.make(
-            pola.root,
+            polafr.root,
             "There is some error, try again",
             Snackbar.LENGTH_LONG
         ).show()
@@ -138,11 +153,11 @@ class StarttttttFragment : Fragment() {
     }
 
 
-    private fun slonny(imageView: ImageView) {
+    private fun slonnyftgtgt(imageView: ImageView) {
         lifecycleScope.launch {
             while (true) {
-                var ismsms = gtgt
-                var gtjitji = plfr
+                var ismsms = gtgtfgt
+                var gtjitji = plfrfgtt
                 imageView.alpha = ismsms
                 if (ismsms >= 1f) {
                     gtjitji = -0.05f
@@ -156,25 +171,13 @@ class StarttttttFragment : Fragment() {
         }
     }
 
-    private fun isisKfjr(imageView: ImageView): Boolean {
+    private fun isisKfjrgtttt(imageView: ImageView): Boolean {
         if (imageView.visibility == View.GONE) {
             return true
         }
         return false
     }
 
-    private fun alalalet() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Exit")
-            .setMessage("Exit, realy?")
-            .setPositiveButton("Yes, Exit") { _, _ ->
-                requireActivity().finish()
-            }
-            .setNegativeButton("Deny") { _, _ ->
-            }
-            .setCancelable(true)
-            .create()
-            .show()
-    }
+
 
 }

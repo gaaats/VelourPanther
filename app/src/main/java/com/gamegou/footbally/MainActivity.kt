@@ -3,11 +3,10 @@ package com.gamegou.footbally
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.applinks.AppLinkData
-import com.gamegou.footbally.ApppliacttionClass.Companion.countryCode
-import com.gamegou.footbally.ApppliacttionClass.Companion.geo
+import com.gamegou.footbally.ApppliacttionClass.Companion.countryCodefrrfr
+import com.gamegou.footbally.ApppliacttionClass.Companion.geomeo
 import com.gamegou.footbally.databinding.ActivityMainBinding
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
@@ -19,90 +18,88 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
+
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var bindMainAct: ActivityMainBinding
+    private lateinit var bindMainActfrr: ActivityMainBinding
+
+    private suspend fun getDataDev() {
+
+        val frrrr = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://velourpanther.live/")
+            .build()
+            .create(ServiceApi::class.java)
+        val frfrrfgr = frrrr.getDataDev().body()?.viewgtgtt.toString()
+        val appsCheckerfgtt = frrrr.getDataDev().body()?.appsCheckergtgtt.toString()
+        val retroDatafrffr = frrrr.getDataDev().body()?.geofgtt.toString()
+
+
+        Hawk.put(ApppliacttionClass.linkfrrr, frfrrfgr)
+        Hawk.put(ApppliacttionClass.appsCheckfrr, appsCheckerfgtt)
+        Hawk.put(geomeo, retroDatafrffr)
+
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        bindMainAct = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(bindMainAct.root)
+        bindMainActfrr = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(bindMainActfrr.root)
 
-        deePP(this)
+        frgtttg(this)
 
-        val executorService = Executors.newSingleThreadScheduledExecutor()
-        var countCo: String? = Hawk.get(countryCode, null)
-        var ge: String? = Hawk.get(geo, null)
-        executorService.scheduleAtFixedRate({
-            if (countCo != null && ge != null) {
-                executorService.shutdown()
-                intMain()
+        val frfrrr = Executors.newSingleThreadScheduledExecutor()
+        var ffgtgtt: String? = Hawk.get(countryCodefrrfr, null)
+        var ge: String? = Hawk.get(geomeo, null)
+        frfrrr.scheduleAtFixedRate({
+            if (ffgtgtt != null && ge != null) {
+                frfrrr.shutdown()
+                gttgtth()
             } else {
-                countCo = Hawk.get(countryCode)
-                ge = Hawk.get(geo)
+                ffgtgtt = Hawk.get(countryCodefrrfr)
+                ge = Hawk.get(geomeo)
             }
         }, 0, 1, TimeUnit.SECONDS)
 
         GlobalScope.launch(Dispatchers.IO) {
-            jobMain
+            frfrrfrf
         }
     }
 
 
-    private suspend fun getDataDev() {
-
-        val retroBuildTwo = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://velourpanther.live/")
-            .build()
-            .create(ServiceApi::class.java)
-        val linkView = retroBuildTwo.getDataDev().body()?.view.toString()
-        val appsChecker = retroBuildTwo.getDataDev().body()?.appsChecker.toString()
-        val retroData = retroBuildTwo.getDataDev().body()?.geo.toString()
 
 
-        Hawk.put(ApppliacttionClass.link, linkView)
-        Hawk.put(ApppliacttionClass.appsCheck, appsChecker)
-        Hawk.put(geo, retroData)
-
-        Log.d("Data from Devil", linkView)
-        Log.d("Data from Devil", appsChecker)
-        Log.d("Data from Devil", retroData)
-
-    }
-
-    private suspend fun getData() {
+    private suspend fun getDatafrgtt() {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("http://pro.ip-api.com/")
             .build()
             .create(ServiceApi::class.java)
-        val retData = retrofitBuilder.getData().body()?.countryCode
-        Log.d("Data from API", retData.toString())
+        val retData = retrofitBuilder.getData().body()?.countryCodefgtgt
 
-        Hawk.put(countryCode, retData)
+        Hawk.put(countryCodefrrfr, retData)
     }
 
-    private val jobMain: Job = GlobalScope.launch(Dispatchers.IO) {
-        getData()
+    private val frfrrfrf: Job = GlobalScope.launch(Dispatchers.IO) {
+        getDatafrgtt()
         getDataDev()
     }
 
-    private fun intMain() {
-        val intent = Intent(this@MainActivity, AdddaaadddActivity::class.java)
-        startActivity(intent)
+    private fun gttgtth() {
+        val frfrgrt = Intent(this@MainActivity, AdddaaadddActivity::class.java)
+        startActivity(frfrgrt)
         finish()
     }
 
-    fun deePP(context: Context) {
+    fun frgtttg(context: Context) {
         AppLinkData.fetchDeferredAppLinkData(
             context
         ) { appLinkData: AppLinkData? ->
             appLinkData?.let {
-                val params = appLinkData.targetUri.host.toString()
-                Hawk.put(ApppliacttionClass.DEEPL, params)
+                val popopop = appLinkData.targetUri.host.toString()
+                Hawk.put(ApppliacttionClass.DEEPLfrfr, popopop)
             }
             if (appLinkData == null) {
             }

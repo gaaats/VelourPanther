@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigatttiiiooonnnaaal"
-    app:startDestination="@id/starttttttFragment">
+    app:startDestination="@id/viiilcomeeeFragment">
 
     <fragment
         android:id="@+id/starttttttFragment"
@@ -38,6 +38,16 @@
         tools:layout="@layout/fragment_reload" >
         <action
             android:id="@+id/action_reloadFragment_to_starttttttFragment"
+            app:destination="@id/starttttttFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/viiilcomeeeFragment"
+        android:name="com.gamegou.footbally.ViiilcomeeeFragment"
+        android:label="fragment_viiilcomeee"
+        tools:layout="@layout/fragment_viiilcomeee" >
+        <action
+            android:id="@+id/action_viiilcomeeeFragment_to_starttttttFragment"
             app:destination="@id/starttttttFragment"
             app:launchSingleTop="true" />
     </fragment>

@@ -2,15 +2,15 @@ package com.gamegou.footbally
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import com.gamegou.footbally.ApppliacttionClass.Companion.MAIN_ID
-import com.gamegou.footbally.ApppliacttionClass.Companion.appsCheck
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import androidx.appcompat.app.AppCompatActivity
+import com.gamegou.footbally.ApppliacttionClass.Companion.MAIN_IDffrr
+import com.gamegou.footbally.ApppliacttionClass.Companion.appsCheckfrr
+
 
 class AdddaaadddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,46 +19,49 @@ class AdddaaadddActivity : AppCompatActivity() {
         checkCountry()
     }
 
-    private fun getShData(): String? {
-        val restCheck: String? = Hawk.get(appsCheck)
-        Log.d("ADACt Data", restCheck.toString())
-        return restCheck
+    private fun intALonehyhyy() {
+        val ddede = Intent(this@AdddaaadddActivity, GaaaameeeHooldeerActivity::class.java)
+        Hawk.put(ApppliacttionClass.geomeo, null)
+        Hawk.put(ApppliacttionClass.countryCodefrrfr, null)
+        Hawk.put(appsCheckfrr, null)
+        startActivity(ddede)
+        finish()
+    }
+
+    private fun ftgthy(): String? {
+        val restCheckftgt: String? = Hawk.get(appsCheckfrr)
+        return restCheckftgt
     }
 
     private fun checkCountry() {
 
-        val check = getShData()
+        val check = ftgthy()
 
         if (check == "0") {
-            intALone()
+            intALonehyhyy()
 
         } else {
             GlobalScope.launch(Dispatchers.Default) {
-                getAdId()
+                getAdIdgtgt()
             }
-            intAfb()
+            intAfbftgtt()
         }
     }
 
-    private fun getAdId() {
+    private fun getAdIdgtgt() {
         val adInfo = AdvertisingIdClient(applicationContext)
         adInfo.start()
         val adIdInfo = adInfo.info.id
-        Log.d("getAdvertisingId = ", adIdInfo.toString())
-        Hawk.put(MAIN_ID, adIdInfo)
+        Hawk.put(MAIN_IDffrr, adIdInfo)
     }
 
-    private fun intALone() {
-        val intent = Intent(this@AdddaaadddActivity, GaaaameeeHooldeerActivity::class.java)
-        Hawk.put(ApppliacttionClass.geo, null)
-        Hawk.put(ApppliacttionClass.countryCode, null)
-        startActivity(intent)
+    private fun intAfbftgtt() {
+        val intentfrfr = Intent(this@AdddaaadddActivity, AsfActtttttttAcct::class.java)
+        startActivity(intentfrfr)
         finish()
     }
 
-    private fun intAfb() {
-        val intent = Intent(this@AdddaaadddActivity, AsfActtttttttAcct::class.java)
-        startActivity(intent)
-        finish()
-    }
+
+
+
 }

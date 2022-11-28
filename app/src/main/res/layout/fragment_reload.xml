@@ -77,7 +77,7 @@
         app:layout_constraintTop_toTopOf="@id/guideline_hor_30fgtghy"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/reload" />
+        app:lottie_rawRes="@raw/reloadftgtt" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_reload"
